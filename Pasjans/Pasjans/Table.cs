@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Pasjans
@@ -40,15 +41,31 @@ namespace Pasjans
 
         public Table(Deck deck) : this()
         {
-            ReserveStock.AddRange(deck.DeckCards.GetRange(0,24));
             Stock1.AddRange(deck.DeckCards.GetRange(24,1));
+            Stock1.Last().IsReversed = true;
+            
             Stock2.AddRange(deck.DeckCards.GetRange(25, 2));
+            Stock2.Last().IsReversed = true;
+            
             Stock3.AddRange(deck.DeckCards.GetRange(27, 3));
+            Stock3.Last().IsReversed = true;
+            
             Stock4.AddRange(deck.DeckCards.GetRange(30, 4));
+            Stock4.Last().IsReversed = true;
+            
             Stock5.AddRange(deck.DeckCards.GetRange(34, 5));
+            Stock5.Last().IsReversed = true;
+           
             Stock6.AddRange(deck.DeckCards.GetRange(39, 6));
+            Stock6.Last().IsReversed = true;
+            
             Stock7.AddRange(deck.DeckCards.GetRange(45, 7));
+            Stock7.Last().IsReversed = true;
+            
+            ReserveStock.AddRange(deck.DeckCards.GetRange(0, 24));
         }
+
+        
 
     }
 

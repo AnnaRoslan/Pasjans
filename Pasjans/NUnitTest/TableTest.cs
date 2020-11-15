@@ -30,5 +30,10 @@ namespace NUnitTest
         {
             Assert.AreEqual(7, _table.Stock7.Count);
         }
+        [Test]
+        public void Is_in_Stock1_first_Card_reverted()
+        {
+            Assert.True(_table.Stock1[0].IsReversed);
+        }
     }
 }
