@@ -43,6 +43,7 @@ namespace Pasjans
                 throw new ArgumentException("This card is not present in given stock.");
             }
 
+            var lastCard = toStock[^1];
             var cardToMoveIndex = fromStock.IndexOf(fromStock.Find(x => x.CardValue == card.CardValue && x.Color == card.Color));
 
             if (!fromStock[cardToMoveIndex].IsReversed)
@@ -50,7 +51,22 @@ namespace Pasjans
                 throw new ArgumentException("Can not move not reversed card.");
             }
 
+            if (!CanLayCardOnOther(lastCard, card))
+            {
+                throw new ArgumentException("Can not move this card.");
+            }
+
             return table;
+        }
+
+        private bool CanLayCardOnOther(Card lastCard, Card cardToMove)
+        {
+            if ((int)lastCard.CardValue <= (int)cardToMove.CardValue)
+            {
+                return false;
+            }
+
+            return (int)lastCard.Color % 2 != (int)cardToMove.Color % 2;
         }
     }
 }
