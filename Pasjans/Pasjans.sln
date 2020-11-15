@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pasjans", "Pasjans\Pasjans.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardPack", "CardPack\CardPack.csproj", "{A685C4C2-EA15-4843-BDA4-7E928D6DD161}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardPackTests", "CardPackTests\CardPackTests.csproj", "{B5001918-199D-43C9-89A1-E2C1AA0236FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{A685C4C2-EA15-4843-BDA4-7E928D6DD161}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A685C4C2-EA15-4843-BDA4-7E928D6DD161}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A685C4C2-EA15-4843-BDA4-7E928D6DD161}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5001918-199D-43C9-89A1-E2C1AA0236FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5001918-199D-43C9-89A1-E2C1AA0236FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5001918-199D-43C9-89A1-E2C1AA0236FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5001918-199D-43C9-89A1-E2C1AA0236FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
