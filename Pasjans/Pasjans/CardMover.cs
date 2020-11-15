@@ -75,6 +75,8 @@ namespace Pasjans
                 fromStock[^1].IsReversed = true;
             }
 
+            MoveToFinal(table);
+
             return table;
         }
 
@@ -98,6 +100,56 @@ namespace Pasjans
             }
 
             return result;
+        }
+
+        private void MoveToFinal(Table table)
+        {
+            var noRequiredCardsToFinal = 13;
+            var stockList = new List<List<Card>>
+            {
+                table.Stock1,
+                table.Stock2,
+                table.Stock3,
+                table.Stock4,
+                table.Stock5,
+                table.Stock6,
+                table.Stock7
+            };
+
+            var finalStocks = new List<List<Card>>
+            {
+                table.FinalStock1, 
+                table.FinalStock2,
+                table.FinalStock3,
+                table.FinalStock4
+            };
+
+            var firstFreeFinalStock = finalStocks.FirstOrDefault(x => x.Count == 0);
+
+            if (firstFreeFinalStock == null)
+            {
+                throw new Exception("All stocks are full, you won!");
+            }
+
+            stockList.ForEach(stock =>
+            {
+                if (stock.Count >= noRequiredCardsToFinal)
+                {
+                    var canMove = true;
+
+                    for (var i = stock.Count - noRequiredCardsToFinal; i < stock.Count; i++)
+                    {
+                        canMove &= CanMoveMultipleCards(i, stock);
+                    }
+
+                    if (canMove)
+                    {
+                        var cardsToMove = stock.GetRange(stock.Count - noRequiredCardsToFinal, noRequiredCardsToFinal);
+                        stock.RemoveRange(stock.Count - noRequiredCardsToFinal, noRequiredCardsToFinal);
+                        firstFreeFinalStock.AddRange(cardsToMove);
+                    }
+                }
+            });
         }
     }
 }

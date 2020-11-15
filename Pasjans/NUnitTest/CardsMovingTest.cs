@@ -144,19 +144,19 @@ namespace NUnitTest
         {
             _table.Stock1.Clear();
             Assert.AreEqual(0, _table.Stock1.Count);
-            Assert.AreEqual(0, _table.FinalStock1);
-            for (var i = 1; i < 13; i++)
+            Assert.AreEqual(0, _table.FinalStock1.Count);
+            for (var i = 12; i > 0; i--)
             {
                 _table.Stock1.Add(new Card((CardValue)i, (Color)(i % 2)) {IsReversed = true});
             }
-            Assert.AreEqual(12, _table.Stock1);
+            Assert.AreEqual(12, _table.Stock1.Count);
             _table.Stock2.Clear();
-            Assert.AreEqual(0, _table.Stock2);
-            _table.Stock2.Add(new Card(CardValue.King, Color.Club));
+            Assert.AreEqual(0, _table.Stock2.Count);
+            _table.Stock2.Add(new Card(CardValue.King, Color.Club) {IsReversed = true});
             Assert.AreEqual(1, _table.Stock2.Count);
-            _cardMover.MoveCard(_table, 2, 1, new Card(CardValue.King, Color.Club));
+            _cardMover.MoveCard(_table, 1, 2, new Card(CardValue.Queen, Color.Heart));
             Assert.AreEqual(0, _table.Stock1.Count);
-            Assert.AreEqual(13, _table.FinalStock1);
+            Assert.AreEqual(13, _table.FinalStock1.Count);
         }
     }
 }
