@@ -6,7 +6,7 @@ namespace CardPack
 {
     public class ShuffledCardPack : IShuffledCardPack
     {
-        public IReadOnlyList<Card> GetCards()
+        public List<Card> GetCards()
         {
             const int cardsNumberInPack = 52;
 
