@@ -1,12 +1,11 @@
-﻿using System;
-
-namespace Pasjans
+﻿namespace Pasjans
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var gameManager = new GameManager();
+            gameManager.StartGame();
         }
     }
 }
