@@ -31,6 +31,9 @@ namespace NUnitTest
             _table.Stock6.Add(new Card(CardValue.Two, Color.Spade) {IsReversed = true});
             _table.Stock7.Add(new Card(CardValue.Three, Color.Diamond) { IsReversed = true });
             _table.Stock7.Add(new Card(CardValue.Four, Color.Club) {IsReversed = true});
+
+            _table.ReserveStock.Add(new Card(CardValue.Three, Color.Heart) { IsReversed = false });
+            _table.ReserveStock.Add(new Card(CardValue.Two, Color.Heart) { IsReversed = true });
         }
 
         [Test]
@@ -108,6 +111,21 @@ namespace NUnitTest
         {
             Assert.Throws(typeof(ArgumentException),
                 () => _cardMover.MoveCard(_table, 7, 5, new Card(CardValue.Three, Color.Diamond)));
+        }
+
+        [Test]
+        public void TestMovingNotReversedFromReserveStock()
+        {
+            Assert.Throws(typeof(ArgumentException), () => _cardMover.MoveCard(_table, 0, 3,
+                new Card(CardValue.Three, Color.Heart) {IsReversed = false}));
+        }
+
+        [Test]
+        public void TestMovingFromReserveStock()
+        {
+            _cardMover.MoveCard(_table, 0, 2, new Card(CardValue.Two, Color.Heart) {IsReversed = true});
+            Assert.AreEqual(1, _table.ReserveStock.Count);
+            Assert.AreEqual(new Card(CardValue.Two, Color.Heart) { IsReversed = true }, _table.Stock2[1]);
         }
     }
 }
