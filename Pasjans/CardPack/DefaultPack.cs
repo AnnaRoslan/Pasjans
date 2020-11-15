@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace CardPack
 {
@@ -10,7 +9,17 @@ namespace CardPack
 
         public static IReadOnlyList<Card> Get()
         {
-            throw new NotImplementedException();
+            var pack = new List<Card>();
+
+            for (var colourIndex = 0; colourIndex < ColoursNumber; colourIndex++)
+            {
+                for (var valueIndex = 0; valueIndex < ValuesNumber; valueIndex++)
+                {
+                    pack.Add(new Card((CardColour) colourIndex, (CardValue) valueIndex));
+                }
+            }
+
+            return pack;
         }
     }
 }
