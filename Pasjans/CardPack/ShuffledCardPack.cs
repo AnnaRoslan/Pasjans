@@ -6,7 +6,9 @@ namespace CardPack
     {
         public IReadOnlyList<Card> GetCards()
         {
-            throw new System.NotImplementedException();
+            var defaultPack = DefaultPack.Get();
+
+            return defaultPack;
         }
     }
 }
