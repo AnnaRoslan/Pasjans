@@ -21,6 +21,7 @@ namespace NUnitTest
 
         private void MockTable()
         {
+            _table.Stock1.Add(new Card(CardValue.Ace, Color.Diamond) {IsReversed = false});
             _table.Stock1.Add(new Card(CardValue.Two, Color.Heart) {IsReversed = true});
             _table.Stock2.Add(new Card(CardValue.Three, Color.Spade) {IsReversed = true});
             _table.Stock3.Add(new Card(CardValue.Four, Color.Club) {IsReversed = true});
@@ -90,7 +91,7 @@ namespace NUnitTest
         public void MoveOneCardTest()
         {
             _cardMover.MoveCard(_table, 1, 2, new Card(CardValue.Two, Color.Heart));
-            Assert.AreEqual(0, _table.Stock1.Count);
+            Assert.AreEqual(1, _table.Stock1.Count);
             Assert.AreEqual(new Card(CardValue.Two, Color.Heart) { IsReversed = true }, _table.Stock2[1]);
         }
 
@@ -126,6 +127,16 @@ namespace NUnitTest
             _cardMover.MoveCard(_table, 0, 2, new Card(CardValue.Two, Color.Heart) {IsReversed = true});
             Assert.AreEqual(1, _table.ReserveStock.Count);
             Assert.AreEqual(new Card(CardValue.Two, Color.Heart) { IsReversed = true }, _table.Stock2[1]);
+        }
+
+        [Test]
+        public void TestReversingAfterMove()
+        {
+            Assert.AreEqual(false, _table.Stock1[0].IsReversed);
+            _cardMover.MoveCard(_table, 1, 2, new Card(CardValue.Two, Color.Heart));
+            Assert.AreEqual(1, _table.Stock1.Count);
+            Assert.AreEqual(new Card(CardValue.Two, Color.Heart) { IsReversed = true }, _table.Stock2[1]);
+            Assert.AreEqual(true, _table.Stock1[0].IsReversed);
         }
     }
 }

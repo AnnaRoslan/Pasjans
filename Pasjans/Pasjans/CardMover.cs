@@ -16,6 +16,7 @@ namespace Pasjans
         {
             var fromStock = from switch
             {
+                0 => table.ReserveStock,
                 1 => table.Stock1,
                 2 => table.Stock2,
                 3 => table.Stock3,
@@ -45,7 +46,7 @@ namespace Pasjans
 
             var lastCard = toStock[^1];
             var cardToMoveIndex = fromStock.IndexOf(fromStock.Find(x => x.CardValue == card.CardValue && x.Color == card.Color));
-            var moveMultiple = cardToMoveIndex != fromStock.Count - 1;
+            var moveMultiple = cardToMoveIndex != fromStock.Count - 1 && from != 0;
 
             if (!fromStock[cardToMoveIndex].IsReversed)
             {
@@ -68,6 +69,11 @@ namespace Pasjans
             var cardsToMove = fromStock.GetRange(cardToMoveIndex, fromStock.Count - cardToMoveIndex);
             fromStock.RemoveRange(cardToMoveIndex, fromStock.Count - cardToMoveIndex);
             toStock.AddRange(cardsToMove);
+
+            if (!fromStock.Any(x => x.IsReversed) && fromStock.Count != 0)
+            {
+                fromStock[^1].IsReversed = true;
+            }
 
             return table;
         }
