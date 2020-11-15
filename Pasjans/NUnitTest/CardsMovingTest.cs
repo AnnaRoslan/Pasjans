@@ -53,5 +53,19 @@ namespace NUnitTest
             Assert.Throws(typeof(ArgumentException),
                 () => _cardMover.MoveCard(_table, 1, 8, new Card(CardValue.Two, Color.Heart)));
         }
+
+        [Test]
+        public void TryMoveNonExistingInStockCard()
+        {
+            Assert.Throws(typeof(ArgumentException),
+                () => _cardMover.MoveCard(_table, 1, 2, new Card(CardValue.Ace, Color.Diamond)));
+        }
+
+        [Test]
+        public void TryMovingReversedCard()
+        {
+            Assert.Throws(typeof(ArgumentException),
+                () => _cardMover.MoveCard(_table, 4, 2, new Card(CardValue.Two, Color.Diamond)));
+        }
     }
 }
