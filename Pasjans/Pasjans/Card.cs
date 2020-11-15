@@ -6,8 +6,13 @@ namespace Pasjans
 {
    public class Card
     {
-        public Color color { get; set; }
-        public CardValue CardValue { get; set; }
+        public Color Color { get; private set; }
+        public CardValue CardValue { get; private set; }
+
+        public Card(CardValue value, Color color)
+        {
+            
+        }
 
     }
 }

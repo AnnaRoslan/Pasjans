@@ -4,13 +4,8 @@ using Pasjans;
 
 namespace NUnitTest
 {
-    public class Tests
+    public class CardValueTest
     {
-        [SetUp]
-        public void Setup()
-        {
-         
-        }
 
         [Test]
         public void Is_Ace_Smaller_Then_two()
