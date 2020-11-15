@@ -14,6 +14,17 @@ namespace Pasjans.PlayingCard
             CardValue = value;
         }
 
+        public override bool Equals(object? obj)
+        {
+            if ((obj == null) || GetType() != obj.GetType())
+            {
+                return false;
+            }
+
+            var other = (Card)obj;
+            return other.CardValue == CardValue && other.Color == Color && other.IsReversed == IsReversed;
+        }
+
         public override string ToString()
         {
             var c = Color switch
