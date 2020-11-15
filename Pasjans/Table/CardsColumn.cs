@@ -8,8 +8,10 @@ namespace Table
         private List<Card> _hiddenCards;
         private List<Card> _visibleCards;
 
-        private CardsColumn()
+        internal CardsColumn(List<Card> hiddenCards, List<Card> visibleCards)
         {
+            _hiddenCards = hiddenCards;
+            _visibleCards = visibleCards;
         }
 
         public List<Card> GetVisibleCards()
