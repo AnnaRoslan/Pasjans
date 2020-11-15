@@ -8,7 +8,7 @@ namespace Pasjans
     {
         public Color Color { get; private set; }
         public CardValue CardValue { get; private set; }
-
+        public bool IsReverse { get; set; }
         public Card(CardValue value, Color color)
         {
             Color = color;

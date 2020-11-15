@@ -22,6 +22,21 @@ namespace Pasjans
                     DeckCards.Add( new Card(value,color));
                 }
             }
+            Shuffle();
+        }
+
+        private void Shuffle()
+        {
+            Random rng = new Random();
+            int n = DeckCards.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                var value = DeckCards[k];
+                DeckCards[k] = DeckCards[n];
+                DeckCards[n] = value;
+            }
         }
     }
 }
