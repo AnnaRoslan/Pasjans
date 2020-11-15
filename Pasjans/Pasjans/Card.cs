@@ -11,8 +11,8 @@ namespace Pasjans
 
         public Card(CardValue value, Color color)
         {
-            
+            Color = color;
+            CardValue = value;
         }
-
     }
 }
