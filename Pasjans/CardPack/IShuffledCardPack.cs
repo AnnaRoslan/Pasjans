@@ -4,6 +4,6 @@ namespace CardPack
 {
     public interface IShuffledCardPack
     {
-        IReadOnlyList<Card> GetShuffledCardPack();
+        IReadOnlyList<Card> GetCards();
     }
 }

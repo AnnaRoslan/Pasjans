@@ -4,7 +4,7 @@ namespace CardPack
 {
     public class ShuffledCardPack : IShuffledCardPack
     {
-        public IReadOnlyList<Card> GetShuffledCardPack()
+        public IReadOnlyList<Card> GetCards()
         {
             throw new System.NotImplementedException();
         }
