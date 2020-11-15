@@ -29,6 +29,7 @@ namespace NUnitTest
             _table.Stock5.Add(new Card(CardValue.Four, Color.Spade) {IsReversed = true});
             _table.Stock6.Add(new Card(CardValue.Three, Color.Diamond) {IsReversed = true});
             _table.Stock6.Add(new Card(CardValue.Two, Color.Spade) {IsReversed = true});
+            _table.Stock7.Add(new Card(CardValue.Three, Color.Diamond) { IsReversed = true });
             _table.Stock7.Add(new Card(CardValue.Four, Color.Club) {IsReversed = true});
         }
 
@@ -80,6 +81,32 @@ namespace NUnitTest
         {
             Assert.Throws(typeof(ArgumentException),
                 () => _cardMover.MoveCard(_table, 2, 3, new Card(CardValue.Three, Color.Spade)));
+        }
+
+        [Test]
+        public void MoveOneCardTest()
+        {
+            _cardMover.MoveCard(_table, 1, 2, new Card(CardValue.Two, Color.Heart));
+            Assert.AreEqual(0, _table.Stock1.Count);
+            Assert.AreEqual(new Card(CardValue.Two, Color.Heart) { IsReversed = true }, _table.Stock2[1]);
+        }
+
+        [Test]
+        public void MoveMultipleCardsTest()
+        {
+            _cardMover.MoveCard(_table, 6, 7, new Card(CardValue.Three, Color.Diamond));
+            Assert.AreEqual(0, _table.Stock6.Count);
+            Assert.AreEqual(3, _table.Stock7.Count);
+            Assert.AreEqual(new Card(CardValue.Four, Color.Club) { IsReversed = true }, _table.Stock7[0]);
+            Assert.AreEqual(new Card(CardValue.Three, Color.Diamond) { IsReversed = true }, _table.Stock7[1]);
+            Assert.AreEqual(new Card(CardValue.Two, Color.Spade) { IsReversed = true }, _table.Stock7[2]);
+        }
+
+        [Test]
+        public void TryMovingMultipleWithWrongOrder()
+        {
+            Assert.Throws(typeof(ArgumentException),
+                () => _cardMover.MoveCard(_table, 7, 5, new Card(CardValue.Three, Color.Diamond)));
         }
     }
 }
