@@ -67,5 +67,19 @@ namespace NUnitTest
             Assert.Throws(typeof(ArgumentException),
                 () => _cardMover.MoveCard(_table, 4, 2, new Card(CardValue.Two, Color.Diamond)));
         }
+
+        [Test]
+        public void TryMovingHigherOnLower()
+        {
+            Assert.Throws(typeof(ArgumentException),
+                () => _cardMover.MoveCard(_table, 2, 1, new Card(CardValue.Three, Color.Spade)));
+        }
+
+        [Test]
+        public void TryMovingOnSameColor()
+        {
+            Assert.Throws(typeof(ArgumentException),
+                () => _cardMover.MoveCard(_table, 2, 3, new Card(CardValue.Three, Color.Spade)));
+        }
     }
 }
