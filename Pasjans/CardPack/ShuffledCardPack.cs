@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CardPack
 {
@@ -6,9 +8,18 @@ namespace CardPack
     {
         public IReadOnlyList<Card> GetCards()
         {
-            var defaultPack = DefaultPack.Get();
+            const int cardsNumberInPack = 52;
 
-            return defaultPack;
+            var defaultPack = DefaultPack.Get();
+            var random = new Random();
+
+            var pack = new HashSet<Card>();
+            while (pack.Count < cardsNumberInPack)
+            {
+                pack.Add(defaultPack[random.Next(cardsNumberInPack)]);
+            }
+
+            return pack.ToList();
         }
     }
 }
