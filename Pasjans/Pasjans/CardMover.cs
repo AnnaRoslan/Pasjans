@@ -14,6 +14,18 @@ namespace Pasjans
 
         public Table MoveCard(Table table, int from, int to, Card card)
         {
+            if (from == 0 && to == 0)
+            {
+                var reserveStock = table.ReserveStock;
+
+                var lastReserveCard = reserveStock.Last();
+                lastReserveCard.IsReversed = false;
+                reserveStock.Remove(lastReserveCard);
+                reserveStock.Last().IsReversed = true;
+                reserveStock.Insert(0, lastReserveCard);
+
+                return table;
+            }
             var fromStock = from switch
             {
                 0 => table.ReserveStock,

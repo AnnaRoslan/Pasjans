@@ -165,7 +165,7 @@ namespace NUnitTest
         {
             _cardMover.MoveCard(_table, 0, 0, null);
             Assert.AreEqual(true, _table.ReserveStock.Last().IsReversed);
-            Assert.AreEqual(false, _table.ReserveStock.GetRange(0, _table.ReserveStock.Count - 1).All(x => x.IsReversed != true));
+            Assert.AreEqual(true, _table.ReserveStock.GetRange(0, _table.ReserveStock.Count - 1).All(x => x.IsReversed == false));
         }
     }
 }
