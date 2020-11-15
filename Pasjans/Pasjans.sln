@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pasjans", "Pasjans\Pasjans.csproj", "{05619528-9B2A-46D1-B534-8B64BEF5EABB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUnitTest", "NUnitTest\NUnitTest.csproj", "{D6A62F08-AFD3-42A9-AD97-588AFBDA7D2C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{05619528-9B2A-46D1-B534-8B64BEF5EABB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05619528-9B2A-46D1-B534-8B64BEF5EABB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05619528-9B2A-46D1-B534-8B64BEF5EABB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6A62F08-AFD3-42A9-AD97-588AFBDA7D2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6A62F08-AFD3-42A9-AD97-588AFBDA7D2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6A62F08-AFD3-42A9-AD97-588AFBDA7D2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6A62F08-AFD3-42A9-AD97-588AFBDA7D2C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
