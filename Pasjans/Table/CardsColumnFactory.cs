@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CardPack;
 
 namespace Table
@@ -7,7 +8,12 @@ namespace Table
     {
         public CardsColumn Create(List<Card> cardPack, int columnCapacity)
         {
-            throw new System.NotImplementedException();
+            if (cardPack == null)
+            {
+                throw new ArgumentException("CardPack cannot be null.");
+            }
+
+            return null;
         }
     }
 }
