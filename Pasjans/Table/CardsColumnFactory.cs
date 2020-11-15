@@ -23,7 +23,12 @@ namespace Table
                 throw new ArgumentException("ColumnCapacity cannot be bigger than cardPack count.");
             }
 
-            return null;
+            var hiddenCards = cardPack.GetRange(cardPack.Count - columnCapacity, columnCapacity - 1);
+            var visibleCards = cardPack.GetRange(cardPack.Count - 1, 1);
+
+            cardPack.RemoveRange(cardPack.Count - columnCapacity, columnCapacity);
+
+            return new CardsColumn(hiddenCards, visibleCards);
         }
     }
 }
