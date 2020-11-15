@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardPack", "CardPack\CardPa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardPackTests", "CardPackTests\CardPackTests.csproj", "{B5001918-199D-43C9-89A1-E2C1AA0236FB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Table", "Table\Table.csproj", "{DA0E7756-E872-4FBA-905C-828602870BB0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TableTests", "TableTests\TableTests.csproj", "{3403B303-4BDF-4A8F-9F42-DA7FE7F14658}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{B5001918-199D-43C9-89A1-E2C1AA0236FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5001918-199D-43C9-89A1-E2C1AA0236FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5001918-199D-43C9-89A1-E2C1AA0236FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA0E7756-E872-4FBA-905C-828602870BB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA0E7756-E872-4FBA-905C-828602870BB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA0E7756-E872-4FBA-905C-828602870BB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA0E7756-E872-4FBA-905C-828602870BB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3403B303-4BDF-4A8F-9F42-DA7FE7F14658}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3403B303-4BDF-4A8F-9F42-DA7FE7F14658}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3403B303-4BDF-4A8F-9F42-DA7FE7F14658}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3403B303-4BDF-4A8F-9F42-DA7FE7F14658}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
