@@ -18,6 +18,11 @@ namespace Table
                 throw new ArgumentException("ColumnCapacity cannot be less than 1.");
             }
 
+            if (columnCapacity > cardPack.Count)
+            {
+                throw new ArgumentException("ColumnCapacity cannot be bigger than cardPack count.");
+            }
+
             return null;
         }
     }
