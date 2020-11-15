@@ -22,10 +22,16 @@ namespace NUnitTest
         }
 
         [Test]
-        public void Is_deck_have_13_cards_of_oe_color()
+        public void Is_deck_have_13_cards_of_one_color()
         {
             var oneColor = deck.DeckCards.Where(x => x.Color == Color.Club).ToList().Count;
-            Assert.Equals(oneColor, 13);
+            Assert.AreEqual(oneColor, 13);
+        }
+        [Test]
+        public void Is_deck_have_4_cards_of_one_Value()
+        {
+            var oneColor = deck.DeckCards.Where(x => x.CardValue == CardValue.Ace).ToList().Count;
+            Assert.AreEqual(oneColor, 4);
         }
     }
 }
