@@ -35,5 +35,18 @@ namespace TableTests
                 }
             );
         }
+
+        [Fact]
+        public void CardsColumnFactory_Create_ThrowArgumentException_ColumnCapacityBiggerThanCardPackLength_Test()
+        {
+            Assert.Throws<ArgumentException>(() =>
+                {
+                    var cardPack = new List<Card> {new Card(CardColour.Club, CardValue.Ace)};
+
+                    var factory = new CardsColumnFactory();
+                    factory.Create(cardPack, 2);
+                }
+            );
+        }
     }
 }
