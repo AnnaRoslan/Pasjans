@@ -38,6 +38,18 @@ namespace Pasjans
                 _ => throw new ArgumentException("Given stock does not exist.")
             };
 
+            if (!fromStock.Any(x => x.CardValue == card.CardValue && x.Color == card.Color))
+            {
+                throw new ArgumentException("This card is not present in given stock.");
+            }
+
+            var cardToMoveIndex = fromStock.IndexOf(fromStock.Find(x => x.CardValue == card.CardValue && x.Color == card.Color));
+
+            if (!fromStock[cardToMoveIndex].IsReversed)
+            {
+                throw new ArgumentException("Can not move not reversed card.");
+            }
+
             return table;
         }
     }
