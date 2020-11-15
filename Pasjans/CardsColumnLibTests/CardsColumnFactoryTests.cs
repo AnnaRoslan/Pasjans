@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Reflection;
 using CardPack;
 using FluentAssertions;
-using Table;
+using CardsColumnLib;
 using Xunit;
 
-namespace TableTests
+namespace CardsColumnLibTests
 {
     public class CardsColumnFactoryTests
     {

@@ -9,9 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardPack", "CardPack\CardPa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardPackTests", "CardPackTests\CardPackTests.csproj", "{B5001918-199D-43C9-89A1-E2C1AA0236FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Table", "Table\Table.csproj", "{DA0E7756-E872-4FBA-905C-828602870BB0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardsColumnLib", "CardsColumnLib\CardsColumnLib.csproj", "{DA0E7756-E872-4FBA-905C-828602870BB0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TableTests", "TableTests\TableTests.csproj", "{3403B303-4BDF-4A8F-9F42-DA7FE7F14658}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardsColumnLibTests", "CardsColumnLibTests\CardsColumnLibTests.csproj", "{3403B303-4BDF-4A8F-9F42-DA7FE7F14658}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

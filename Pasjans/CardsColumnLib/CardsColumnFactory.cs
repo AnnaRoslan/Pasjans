@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using CardPack;
 
-namespace Table
+namespace CardsColumnLib
 {
     public class CardsColumnFactory : ICardsColumnFactory
     {
