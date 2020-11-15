@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using Pasjans;
 using Pasjans.PlayingCard;
@@ -157,6 +158,14 @@ namespace NUnitTest
             _cardMover.MoveCard(_table, 1, 2, new Card(CardValue.Queen, Color.Heart));
             Assert.AreEqual(0, _table.Stock1.Count);
             Assert.AreEqual(13, _table.FinalStock1.Count);
+        }
+
+        [Test]
+        public void TestGettingNewCardFromReserve()
+        {
+            _cardMover.MoveCard(_table, 0, 0, null);
+            Assert.AreEqual(true, _table.ReserveStock.Last().IsReversed);
+            Assert.AreEqual(false, _table.ReserveStock.GetRange(0, _table.ReserveStock.Count - 1).All(x => x.IsReversed != true));
         }
     }
 }
