@@ -13,6 +13,11 @@ namespace Table
                 throw new ArgumentException("CardPack cannot be null.");
             }
 
+            if (columnCapacity < 1)
+            {
+                throw new ArgumentException("ColumnCapacity cannot be less than 1.");
+            }
+
             return null;
         }
     }
