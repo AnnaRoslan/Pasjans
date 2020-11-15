@@ -4,12 +4,12 @@ using Xunit;
 
 namespace CardPackTests
 {
-    public class DefaultPackTests
+    public class DefaultCardPackTests
     {
         [Fact]
         public void DefaultPack_Get_Return52UniqueCards_Test()
         {
-            var pack = DefaultPack.Get();
+            var pack = DefaultCardPack.GetCards();
             Assert.Equal(52, pack.Distinct().Count());
         }
     }

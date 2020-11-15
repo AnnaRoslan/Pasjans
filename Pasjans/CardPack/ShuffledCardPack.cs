@@ -10,7 +10,7 @@ namespace CardPack
         {
             const int cardsNumberInPack = 52;
 
-            var defaultPack = DefaultPack.Get();
+            var defaultPack = DefaultCardPack.GetCards();
             var random = new Random();
 
             var pack = new HashSet<Card>();

@@ -16,7 +16,7 @@ namespace CardPackTests
         [Fact]
         public void ShuffledPack_Get_ReturnShuffledCards_Test()
         {
-            var defaultPack = DefaultPack.Get();
+            var defaultPack = DefaultCardPack.GetCards();
 
             var pack = new ShuffledCardPack().GetCards();
 
