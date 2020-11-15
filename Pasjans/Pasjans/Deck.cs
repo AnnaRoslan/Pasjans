@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Dynamic;
-using System.Text;
+using Pasjans.PlayingCard;
 
 namespace Pasjans
 {
@@ -14,14 +13,15 @@ namespace Pasjans
             DeckCards = new List<Card>();
             for (int i = 0; i < 4; i++)
             {
-                Color color = (Color)i;
+                Color color = (Color) i;
 
                 for (int j = 1; j <= 13; j++)
                 {
                     var value = (CardValue) j;
-                    DeckCards.Add( new Card(value,color));
+                    DeckCards.Add(new Card(value, color));
                 }
             }
+
             Shuffle();
         }
 

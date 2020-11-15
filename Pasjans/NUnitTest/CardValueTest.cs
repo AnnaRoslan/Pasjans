@@ -1,6 +1,7 @@
 using System.Runtime.CompilerServices;
 using NUnit.Framework;
 using Pasjans;
+using Pasjans.PlayingCard;
 
 namespace NUnitTest
 {

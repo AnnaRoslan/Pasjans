@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Pasjans
+﻿namespace Pasjans.PlayingCard
 {
     public enum Color
     {
@@ -10,9 +6,5 @@ namespace Pasjans
         Spade = 1, // ♠ 
         Diamond = 2, // ♦ 
         Club = 3 // ♣ 
-
     }
-    
-        
-    
 }
