@@ -96,10 +96,11 @@ namespace NUnitTest
         {
             _cardMover.MoveCard(_table, 6, 7, new Card(CardValue.Three, Color.Diamond));
             Assert.AreEqual(0, _table.Stock6.Count);
-            Assert.AreEqual(3, _table.Stock7.Count);
-            Assert.AreEqual(new Card(CardValue.Four, Color.Club) { IsReversed = true }, _table.Stock7[0]);
-            Assert.AreEqual(new Card(CardValue.Three, Color.Diamond) { IsReversed = true }, _table.Stock7[1]);
-            Assert.AreEqual(new Card(CardValue.Two, Color.Spade) { IsReversed = true }, _table.Stock7[2]);
+            Assert.AreEqual(4, _table.Stock7.Count);
+            Assert.AreEqual(new Card(CardValue.Three, Color.Diamond) { IsReversed = true }, _table.Stock7[0]);
+            Assert.AreEqual(new Card(CardValue.Four, Color.Club) { IsReversed = true }, _table.Stock7[1]);
+            Assert.AreEqual(new Card(CardValue.Three, Color.Diamond) { IsReversed = true }, _table.Stock7[2]);
+            Assert.AreEqual(new Card(CardValue.Two, Color.Spade) { IsReversed = true }, _table.Stock7[3]);
         }
 
         [Test]

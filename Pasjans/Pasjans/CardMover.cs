@@ -45,6 +45,7 @@ namespace Pasjans
 
             var lastCard = toStock[^1];
             var cardToMoveIndex = fromStock.IndexOf(fromStock.Find(x => x.CardValue == card.CardValue && x.Color == card.Color));
+            var moveMultiple = cardToMoveIndex != fromStock.Count - 1;
 
             if (!fromStock[cardToMoveIndex].IsReversed)
             {
@@ -55,6 +56,18 @@ namespace Pasjans
             {
                 throw new ArgumentException("Can not move this card.");
             }
+
+            if (moveMultiple)
+            {
+                if (!CanMoveMultipleCards(cardToMoveIndex, fromStock))
+                {
+                    throw new ArgumentException("Can not move cards in the following order.");
+                }
+            }
+
+            var cardsToMove = fromStock.GetRange(cardToMoveIndex, fromStock.Count - cardToMoveIndex);
+            fromStock.RemoveRange(cardToMoveIndex, fromStock.Count - cardToMoveIndex);
+            toStock.AddRange(cardsToMove);
 
             return table;
         }
@@ -67,6 +80,18 @@ namespace Pasjans
             }
 
             return (int)lastCard.Color % 2 != (int)cardToMove.Color % 2;
+        }
+
+        private bool CanMoveMultipleCards(int index, List<Card> stock)
+        {
+            var result = true;
+
+            for (var i = index; i < stock.Count - 1; i++)
+            {
+                result &= CanLayCardOnOther(stock[i], stock[i + 1]);
+            }
+
+            return result;
         }
     }
 }
