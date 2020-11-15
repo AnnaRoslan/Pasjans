@@ -12,5 +12,15 @@ namespace CardPackTests
             var pack = new ShuffledCardPack().GetCards();
             Assert.Equal(52, pack.Distinct().Count());
         }
+
+        [Fact]
+        public void ShuffledPack_Get_ReturnShuffledCards_Test()
+        {
+            var defaultPack = DefaultPack.Get();
+
+            var pack = new ShuffledCardPack().GetCards();
+
+            Assert.NotEqual(defaultPack, pack);
+        }
     }
 }
