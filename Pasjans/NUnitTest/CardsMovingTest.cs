@@ -163,9 +163,19 @@ namespace NUnitTest
         [Test]
         public void TestGettingNewCardFromReserve()
         {
-            _cardMover.MoveCard(_table, 0, 0, null);
-            Assert.AreEqual(true, _table.ReserveStock.Last().IsReversed);
-            Assert.AreEqual(true, _table.ReserveStock.GetRange(0, _table.ReserveStock.Count - 1).All(x => x.IsReversed == false));
+            _table = new Table(new Deck());
+            var initReserveStockLength = _table.ReserveStock.Count;
+            for (var i = 0; i < 24; i++)
+            {
+                var lastCard = _table.ReserveStock.Last();
+                var prevLastCard = _table.ReserveStock[^2];
+                _cardMover.MoveCard(_table, 0, 0, null);
+                Assert.AreEqual(initReserveStockLength, _table.ReserveStock.Count);
+                Assert.AreEqual(true, _table.ReserveStock.Last().IsReversed);
+                Assert.AreEqual(true, _table.ReserveStock.GetRange(0, _table.ReserveStock.Count - 1).All(x => x.IsReversed == false));
+                Assert.AreEqual(lastCard, _table.ReserveStock[0]);
+                Assert.AreEqual(prevLastCard, _table.ReserveStock.Last());
+            }
         }
     }
 }
