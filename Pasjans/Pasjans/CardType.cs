@@ -4,12 +4,16 @@ using System.Text;
 
 namespace Pasjans
 {
-    public class CardType
-    {
-        public CardType type { get; private set; }
-       
+   // public class CardType
+ //   {
+  //      public CardType Type { get; private set; }
+  //
+    //    public CardType(CardValue cardtype)
+   //     {
+            //Type 
+  //      }
 
-    }
+  //  }
     public enum CardValue
     {
         Ace = 1,
@@ -24,6 +28,7 @@ namespace Pasjans
         Ten = 10,
         Jack = 11,
         Queen = 12,
-        King = 13
+        King = 13,
     }
+
 }
