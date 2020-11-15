@@ -138,5 +138,25 @@ namespace NUnitTest
             Assert.AreEqual(new Card(CardValue.Two, Color.Heart) { IsReversed = true }, _table.Stock2[1]);
             Assert.AreEqual(true, _table.Stock1[0].IsReversed);
         }
+
+        [Test]
+        public void TestMoveToFinal()
+        {
+            _table.Stock1.Clear();
+            Assert.AreEqual(0, _table.Stock1.Count);
+            Assert.AreEqual(0, _table.FinalStock1);
+            for (var i = 1; i < 13; i++)
+            {
+                _table.Stock1.Add(new Card((CardValue)i, (Color)(i % 2)) {IsReversed = true});
+            }
+            Assert.AreEqual(12, _table.Stock1);
+            _table.Stock2.Clear();
+            Assert.AreEqual(0, _table.Stock2);
+            _table.Stock2.Add(new Card(CardValue.King, Color.Club));
+            Assert.AreEqual(1, _table.Stock2.Count);
+            _cardMover.MoveCard(_table, 2, 1, new Card(CardValue.King, Color.Club));
+            Assert.AreEqual(0, _table.Stock1.Count);
+            Assert.AreEqual(13, _table.FinalStock1);
+        }
     }
 }
