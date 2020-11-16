@@ -16,40 +16,21 @@ namespace Pasjans
         {
             if (from == 0 && to == 0)
             {
-                var reserveStock = table.ReserveStock;
-
-                var lastReserveCard = reserveStock.Last();
-                lastReserveCard.IsReversed = false;
-                reserveStock.Remove(lastReserveCard);
-                reserveStock.Last().IsReversed = true;
-                reserveStock.Insert(0, lastReserveCard);
-
-                return table;
+                return GetNewCardFromReserveStock(table);
             }
-            var fromStock = from switch
-            {
-                0 => table.ReserveStock,
-                1 => table.Stock1,
-                2 => table.Stock2,
-                3 => table.Stock3,
-                4 => table.Stock4,
-                5 => table.Stock5,
-                6 => table.Stock6,
-                7 => table.Stock7,
-                _ => throw new ArgumentException("Given stock does not exist.")
-            };
 
-            var toStock = to switch
+            if (card == null)
             {
-                1 => table.Stock1,
-                2 => table.Stock2,
-                3 => table.Stock3,
-                4 => table.Stock4,
-                5 => table.Stock5,
-                6 => table.Stock6,
-                7 => table.Stock7,
-                _ => throw new ArgumentException("Given stock does not exist.")
-            };
+                throw new ArgumentException("Card can not be null.");
+            }
+
+            if (to == 0)
+            {
+                throw new ArgumentException("Can not move to reserve stock from another stock.");
+            }
+
+            var fromStock = GetStock(table, from);
+            var toStock = GetStock(table, to);
 
             if (!fromStock.Any(x => x.CardValue == card.CardValue && x.Color == card.Color))
             {
@@ -82,10 +63,7 @@ namespace Pasjans
             fromStock.RemoveRange(cardToMoveIndex, fromStock.Count - cardToMoveIndex);
             toStock.AddRange(cardsToMove);
 
-            if (!fromStock.Any(x => x.IsReversed) && fromStock.Count != 0)
-            {
-                fromStock[^1].IsReversed = true;
-            }
+            Revert(fromStock);
 
             MoveToFinal(table);
 
@@ -162,6 +140,45 @@ namespace Pasjans
                     }
                 }
             });
+        }
+
+        private Table GetNewCardFromReserveStock(Table table)
+        {
+            var reserveStock = table.ReserveStock;
+
+            var lastReserveCard = reserveStock.Last();
+            lastReserveCard.IsReversed = false;
+            reserveStock.Remove(lastReserveCard);
+            reserveStock.Last().IsReversed = true;
+            reserveStock.Insert(0, lastReserveCard);
+
+            return table;
+        }
+
+        private List<Card> GetStock(Table table, int stockNumber)
+        {
+            var stock = stockNumber switch
+            {
+                0 => table.ReserveStock,
+                1 => table.Stock1,
+                2 => table.Stock2,
+                3 => table.Stock3,
+                4 => table.Stock4,
+                5 => table.Stock5,
+                6 => table.Stock6,
+                7 => table.Stock7,
+                _ => throw new ArgumentException("Given stock does not exist.")
+            };
+
+            return stock;
+        }
+
+        private void Revert(List<Card> stock)
+        {
+            if (!stock.Any(x => x.IsReversed) && stock.Count != 0)
+            {
+                stock[^1].IsReversed = true;
+            }
         }
     }
 }
