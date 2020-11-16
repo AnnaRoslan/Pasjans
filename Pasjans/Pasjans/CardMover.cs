@@ -84,10 +84,10 @@ namespace Pasjans
             fromStock.RemoveRange(cardToMoveIndex, fromStock.Count - cardToMoveIndex);
             toStock.AddRange(cardsToMove);
 
+            MoveToFinal(table);
+
             Revert(fromStock);
 
-            MoveToFinal(table);
-            
             return table;
         }
 
