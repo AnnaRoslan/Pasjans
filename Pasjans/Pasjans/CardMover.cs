@@ -37,7 +37,6 @@ namespace Pasjans
                 throw new ArgumentException("This card is not present in given stock.");
             }
 
-            var lastCard = toStock[^1];
             var cardToMoveIndex = fromStock.IndexOf(fromStock.Find(x => x.CardValue == card.CardValue && x.Color == card.Color));
             var moveMultiple = cardToMoveIndex != fromStock.Count - 1 && from != 0;
 
@@ -46,19 +45,24 @@ namespace Pasjans
                 throw new ArgumentException("Can not move not reversed card.");
             }
 
-            if (!CanLayCardOnOther(lastCard, card))
+            if (toStock.Count != 0)
             {
-                throw new ArgumentException("Can not move this card.");
-            }
+                var lastCard = toStock[^1];
 
-            if (moveMultiple)
-            {
-                if (!CanMoveMultipleCards(cardToMoveIndex, fromStock))
+                if (!CanLayCardOnOther(lastCard, card))
                 {
-                    throw new ArgumentException("Can not move cards in the following order.");
+                    throw new ArgumentException("Can not move this card.");
+                }
+
+                if (moveMultiple)
+                {
+                    if (!CanMoveMultipleCards(cardToMoveIndex, fromStock))
+                    {
+                        throw new ArgumentException("Can not move cards in the following order.");
+                    }
                 }
             }
-
+            
             var cardsToMove = fromStock.GetRange(cardToMoveIndex, fromStock.Count - cardToMoveIndex);
             fromStock.RemoveRange(cardToMoveIndex, fromStock.Count - cardToMoveIndex);
             toStock.AddRange(cardsToMove);
@@ -72,7 +76,7 @@ namespace Pasjans
 
         private bool CanLayCardOnOther(Card lastCard, Card cardToMove)
         {
-            if ((int)lastCard.CardValue <= (int)cardToMove.CardValue)
+            if ((int)lastCard.CardValue - (int)cardToMove.CardValue != 1)
             {
                 return false;
             }
