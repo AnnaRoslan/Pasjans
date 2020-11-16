@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using Pasjans;
 using Pasjans.PlayingCard;
@@ -137,6 +138,44 @@ namespace NUnitTest
             Assert.AreEqual(1, _table.Stock1.Count);
             Assert.AreEqual(new Card(CardValue.Two, Color.Heart) { IsReversed = true }, _table.Stock2[1]);
             Assert.AreEqual(true, _table.Stock1[0].IsReversed);
+        }
+
+        [Test]
+        public void TestMoveToFinal()
+        {
+            _table.Stock1.Clear();
+            Assert.AreEqual(0, _table.Stock1.Count);
+            Assert.AreEqual(0, _table.FinalStock1.Count);
+            for (var i = 12; i > 0; i--)
+            {
+                _table.Stock1.Add(new Card((CardValue)i, (Color)(i % 2)) {IsReversed = true});
+            }
+            Assert.AreEqual(12, _table.Stock1.Count);
+            _table.Stock2.Clear();
+            Assert.AreEqual(0, _table.Stock2.Count);
+            _table.Stock2.Add(new Card(CardValue.King, Color.Club) {IsReversed = true});
+            Assert.AreEqual(1, _table.Stock2.Count);
+            _cardMover.MoveCard(_table, 1, 2, new Card(CardValue.Queen, Color.Heart));
+            Assert.AreEqual(0, _table.Stock1.Count);
+            Assert.AreEqual(13, _table.FinalStock1.Count);
+        }
+
+        [Test]
+        public void TestGettingNewCardFromReserve()
+        {
+            _table = new Table(new Deck());
+            var initReserveStockLength = _table.ReserveStock.Count;
+            for (var i = 0; i < 24; i++)
+            {
+                var lastCard = _table.ReserveStock.Last();
+                var prevLastCard = _table.ReserveStock[^2];
+                _cardMover.MoveCard(_table, 0, 0, null);
+                Assert.AreEqual(initReserveStockLength, _table.ReserveStock.Count);
+                Assert.AreEqual(true, _table.ReserveStock.Last().IsReversed);
+                Assert.AreEqual(true, _table.ReserveStock.GetRange(0, _table.ReserveStock.Count - 1).All(x => x.IsReversed == false));
+                Assert.AreEqual(lastCard, _table.ReserveStock[0]);
+                Assert.AreEqual(prevLastCard, _table.ReserveStock.Last());
+            }
         }
     }
 }
