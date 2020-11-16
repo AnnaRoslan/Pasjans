@@ -212,5 +212,24 @@ namespace NUnitTest
             _table = _cardMover.UndoMove();
             Assert.AreEqual(true, tableCopy.Equals(_table));
         }
+
+        [Test]
+        public void TestGameWinning()
+        {
+            Assert.AreEqual(false, _table.IsGameWon);
+            for (var j = 0; j < 4; j++)
+            {
+                _table.Stock1.Clear();
+                for (var i = 12; i > 0; i--)
+                {
+                    _table.Stock1.Add(new Card((CardValue)i, (Color)(i % 2)) { IsReversed = true });
+                }
+                _table.Stock2.Clear();
+                _table.Stock2.Add(new Card(CardValue.King, Color.Club) { IsReversed = true });
+                _cardMover.MoveCard(_table, 1, 2, new Card(CardValue.Queen, Color.Heart));
+            }
+
+            Assert.AreEqual(true, _table.IsGameWon);
+        }
     }
 }
