@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
@@ -28,6 +29,8 @@ namespace Pasjans
                 error = ProcessInput(Console.ReadLine());
 
             } while (!isWin);
+
+            PrintWinnerBanner();
         }
 
         private string ProcessInput(string userInput)
@@ -40,8 +43,17 @@ namespace Pasjans
             if (spots.Length < 1)
                 return error;
 
-
-            if ("RD".Equals(spots[0], StringComparison.OrdinalIgnoreCase))
+            if ("Undo".Equals(spots[0], StringComparison.OrdinalIgnoreCase))
+            {
+                try
+                {
+                    _table = _cardMover.UndoMove();
+                }
+                catch (Exception e)
+                {
+                    error= e.Message;
+                }
+            }else if ("RD".Equals(spots[0], StringComparison.OrdinalIgnoreCase))
             {
                 if (_table.ReserveStock.Count > 0)
                 {
@@ -182,7 +194,6 @@ namespace Pasjans
             };
 
             Console.Clear();
-
             var sb = new StringBuilder();
             sb.Append("__________________Solitaire_______________________\n");
             sb.Append($"  -RD-   -RC-          -S1-   -S2-   -S3-   -S4-  \n");
@@ -205,6 +216,18 @@ namespace Pasjans
             sb.Append("__________________________________________________\n");
             sb.Append(error+ "\n");
             sb.Append("Your move:");
+            Console.WriteLine(sb);
+        }
+
+        private void PrintWinnerBanner()
+        {
+            Console.Clear();
+            Console.Clear();
+            var sb = new StringBuilder();
+            sb.Append("__________________Solitaire_______________________\n");
+            sb.Append("\n                   You won!\n\n");
+            sb.Append("__________________________________________________\n");
+
             Console.WriteLine(sb);
         }
     }

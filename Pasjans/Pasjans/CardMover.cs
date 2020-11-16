@@ -12,7 +12,7 @@ namespace Pasjans
         {
             if (_tableHistory.Count == 0)
             {
-                throw new Exception("Can not undo move, more previous moves.");
+                throw new Exception("Can not undo move. No more previous moves.");
             }
 
             var lastTable = _tableHistory.Last();
