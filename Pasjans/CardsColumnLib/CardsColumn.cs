@@ -6,7 +6,7 @@ namespace CardsColumnLib
     public class CardsColumn : ICardsColumn
     {
         private List<Card> _hiddenCards;
-        private List<Card> _visibleCards;
+        private readonly List<Card> _visibleCards;
 
         internal CardsColumn(List<Card> hiddenCards, List<Card> visibleCards)
         {
@@ -20,7 +20,7 @@ namespace CardsColumnLib
 
         public List<Card> GetVisibleCards()
         {
-            throw new System.NotImplementedException();
+            return _visibleCards;
         }
 
         public List<Card> PeekTopVisibleCards(int n)
