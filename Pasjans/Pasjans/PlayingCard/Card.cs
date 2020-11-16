@@ -1,7 +1,9 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 
 namespace Pasjans.PlayingCard
 {
+    [Serializable]
     public class Card
     {
         public Color Color { get; }

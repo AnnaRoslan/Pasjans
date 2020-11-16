@@ -193,5 +193,15 @@ namespace NUnitTest
             Assert.AreEqual(1, _table.Stock1.Count);
             Assert.AreEqual(new Card(CardValue.Three, Color.Spade){IsReversed = true}, _table.Stock1[0]);
         }
+
+        [Test]
+        public void UndoMoveTest()
+        {
+            var tableCopy = _table.Clone();
+            _cardMover.MoveCard(_table, 1, 2, new Card(CardValue.Two, Color.Heart));
+            Assert.AreEqual(false, tableCopy.Equals(_table));
+            _table = _cardMover.UndoMove();
+            Assert.AreEqual(true, tableCopy.Equals(_table));
+        }
     }
 }

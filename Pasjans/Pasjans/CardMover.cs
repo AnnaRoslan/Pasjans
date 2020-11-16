@@ -12,6 +12,10 @@ namespace Pasjans
 
         }
 
+        public Table UndoMove()
+        {
+            return new Table();
+        }
         public Table MoveCard(Table table, int from, int to, Card card)
         {
             if (from == 0 && to == 0)
