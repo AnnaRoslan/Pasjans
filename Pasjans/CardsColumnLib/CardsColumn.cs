@@ -14,6 +14,10 @@ namespace CardsColumnLib
             _visibleCards = visibleCards;
         }
 
+        private CardsColumn()
+        {
+        }
+
         public List<Card> GetVisibleCards()
         {
             throw new System.NotImplementedException();
