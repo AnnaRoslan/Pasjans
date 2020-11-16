@@ -82,6 +82,12 @@ namespace NUnitTest
         }
 
         [Test]
+        public void TryMovingWithHighValueDifference()
+        {
+            Assert.Throws(typeof(ArgumentException), () => _cardMover.MoveCard(_table, 1, 7, new Card(CardValue.Two, Color.Heart)));
+        }
+
+        [Test]
         public void TryMovingOnSameColor()
         {
             Assert.Throws(typeof(ArgumentException),
@@ -176,6 +182,16 @@ namespace NUnitTest
                 Assert.AreEqual(lastCard, _table.ReserveStock[0]);
                 Assert.AreEqual(prevLastCard, _table.ReserveStock.Last());
             }
+        }
+
+        [Test]
+        public void MoveOnEmptyStockTest()
+        {
+            _table.Stock1.Clear();
+            Assert.AreEqual(0, _table.Stock1.Count);
+            _cardMover.MoveCard(_table, 2, 1, new Card(CardValue.Three, Color.Spade));
+            Assert.AreEqual(1, _table.Stock1.Count);
+            Assert.AreEqual(new Card(CardValue.Three, Color.Spade){IsReversed = true}, _table.Stock1[0]);
         }
     }
 }
