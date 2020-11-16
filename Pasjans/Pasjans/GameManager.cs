@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using Pasjans.PlayingCard;
 
 namespace Pasjans
@@ -9,40 +11,89 @@ namespace Pasjans
         public void StartGame()
         {
             var isWin = false;
+            var cardMover= new CardMover();
             var table = new Table(new Deck());
             do
             {
                 PrintTable(table);
+                
                 var userInput = Console.ReadLine();
+                if(userInput == null)
+                    continue;
+
                 var spots = userInput.Split(" ");
+                if(spots.Length <1)
+                    continue;
 
-                if ("RD".Equals(spots?[1], StringComparison.OrdinalIgnoreCase))
+
+                if ("RD".Equals(spots[0], StringComparison.OrdinalIgnoreCase))
                 {
-
-                }else if ("RC".Equals(spots?[1], StringComparison.OrdinalIgnoreCase))
+                    if (table.ReserveStock.Count > 0)
+                    {
+                        try
+                        {
+                            table = cardMover.MoveCard(table, 0, 0, table.ReserveStock.Last());
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("There is no mo card on ReservedStock!");
+                    }
+                }else if ("RC".Equals(spots[0], StringComparison.OrdinalIgnoreCase))
                 {
+                    if (spots.Length > 1)
+                    {
+                        if (int.TryParse(spots[1], out var target))
+                        {
+                            if (target > 0 && target < 8)
+                            {
+                                try
+                                {
+                                    table = cardMover.MoveCard(table, 0, target, table.ReserveStock.Last());
+                                }
+                                catch (Exception e)
+                                {
+                                    Console.WriteLine(e.Message);
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("No proper target name for move. Try digit from 1 to 7.");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("No proper target name for move. Try digit from 1 to 7."); 
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("No target for move.");
+                    }
 
-                }else if ("S1".Equals(spots?[1], StringComparison.OrdinalIgnoreCase))
+                }else if (int.TryParse(spots[1], out var source))
                 {
+                    if (source > 0 && source < 8)
+                    {
 
-                }else if ("S2".Equals(spots?[1], StringComparison.OrdinalIgnoreCase))
+                    }
+                    else
+                    {
+                        Console.WriteLine("No proper source name for move. Try digit from 1 to 7.");
+                    }
+                }
+                else
                 {
-
-                }else if ("S3".Equals(spots?[1], StringComparison.OrdinalIgnoreCase))
-                {
-
-                }else if ("S4".Equals(spots?[1], StringComparison.OrdinalIgnoreCase))
-                {
-
+                    Console.WriteLine("No proper source name for move. Try digit from 1 to 7.");
                 }
 
             } while (!isWin);
         }
 
-        public Table MoveCard(Table table, int from, int to, Card card)
-        {
-            return table;
-        }
         private void PrintTable(Table table)
         {
             var rd = "██";
