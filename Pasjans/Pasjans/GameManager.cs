@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
+using System.Text.RegularExpressions;
 using Pasjans.PlayingCard;
 
 namespace Pasjans
@@ -229,7 +230,27 @@ namespace Pasjans
             sb.Append("__________________________________________________\n");
             sb.Append(error+ "\n");
             sb.Append("Your move:");
-            Console.WriteLine(sb);
+
+            PrintWithColor(sb.ToString());
+        }
+
+        private void PrintWithColor(string sb)
+        {
+            var matches = Regex.Matches(sb, @"\|.\w[H,D]\s\|");
+            var lastEnd = 0;
+            foreach (Match match in matches)
+            {
+                var index = match.Index;
+                Console.Write(sb.Substring(lastEnd, index - lastEnd));
+
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write(sb.Substring(index, 6));
+                Console.ForegroundColor = ConsoleColor.White;
+
+                lastEnd = index + 6;
+            }
+            Console.Write(sb.Substring(lastEnd,sb.Length-lastEnd));
+
         }
 
         private void PrintWinnerBanner()
