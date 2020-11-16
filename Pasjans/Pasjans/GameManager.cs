@@ -21,29 +21,42 @@ namespace Pasjans
 
         public void StartGame()
         {
-            var isWin = false;
             var error = "";
             do
             {
                 PrintTable(_table, error);
                 error = ProcessInput(Console.ReadLine());
 
-            } while (!isWin);
+            } while (!_table.IsGameWon);
 
             PrintWinnerBanner();
         }
 
         private string ProcessInput(string userInput)
         {
-            var error = "";
+            var message = "";
             if (userInput == null)
-                return error;
+                return message;
 
             var spots = userInput.Split(" ");
             if (spots.Length < 1)
-                return error;
+                return message;
 
-            if ("Undo".Equals(spots[0], StringComparison.OrdinalIgnoreCase))
+            if ("Restart".Equals(spots[0], StringComparison.OrdinalIgnoreCase))
+            {
+                message = "Game restarted.";
+                _table = new Table(new Deck());
+            }
+            else if ("Help".Equals(spots[0], StringComparison.OrdinalIgnoreCase) ||
+                "Man".Equals(spots[0], StringComparison.OrdinalIgnoreCase))
+            {
+                message = "COMMANDS: \n" +
+                          "Restart               -restart a game\n"+
+                          "Undo                  -undo your last move\n" +
+                          "RD                    -get new card from reserve deck\n" +
+                          "RC <1-7>              -move reserve card to <1-7> column\n" +
+                          "<1-7> <1-7> <card id> -move form column <1-7> to column <1-7> starts at card of id <card id>";
+            } else if ("Undo".Equals(spots[0], StringComparison.OrdinalIgnoreCase))
             {
                 try
                 {
@@ -51,7 +64,7 @@ namespace Pasjans
                 }
                 catch (Exception e)
                 {
-                    error= e.Message;
+                    message= e.Message;
                 }
             }else if ("RD".Equals(spots[0], StringComparison.OrdinalIgnoreCase))
             {
@@ -63,12 +76,12 @@ namespace Pasjans
                     }
                     catch (Exception e)
                     {
-                        error = e.Message;
+                        message = e.Message;
                     }
                 }
                 else
                 {
-                    error = "There is no more card on ReservedStock!";
+                    message = "There is no more card on ReservedStock!";
                 }
             }
             else if ("RC".Equals(spots[0], StringComparison.OrdinalIgnoreCase))
@@ -81,12 +94,12 @@ namespace Pasjans
                     }
                     catch (Exception e)
                     {
-                        error = e.Message;
+                        message = e.Message;
                     }
                 }
                 else
                 {
-                    error = "No valid target name for move. Try digit from 1 to 7.";
+                    message = "No valid target name for move. Try digit from 1 to 7.";
                 }
 
             }
@@ -148,7 +161,7 @@ namespace Pasjans
                         }
                         else
                         {
-                            error = "Not valid name of the card to move.";
+                            message = "Not valid name of the card to move.";
                         }
 
                         if (value != null && color != null)
@@ -158,20 +171,20 @@ namespace Pasjans
                     }
                     catch (Exception e)
                     {
-                        error = e.Message;
+                        message = e.Message;
                     }
                 }
                 else
                 {
-                    error = "No valid target name for move. Try digit from 1 to 7.";
+                    message = "No valid target name for move. Try digit from 1 to 7.";
                 }
             }
             else
             {
-                error = "No valid source name for move. Try digit from 1 to 7, RD or RC.";
+                message = "No valid source name for move. Try digit from 1 to 7, RD or RC.";
             }
 
-            return error;
+            return message;
         }
 
         private void PrintTable(Table table, string error)
@@ -226,6 +239,7 @@ namespace Pasjans
             var sb = new StringBuilder();
             sb.Append("__________________Solitaire_______________________\n");
             sb.Append("\n                   You won!\n\n");
+            sb.Append("   _,-\"\"`\"\"-~`)\r\n(`~_,=========\\\r\n |---,___.-.__,\\\r\n |        o     \\ ___  _,,,,_     _.--.\r\n  \\      `^`    /`_.-\"~      `~-;`     \\\r\n   \\_      _  .'                 `,     |\r\n     |`-                           \\'__/ \r\n    /                      ,_       \\  `'-. \r\n   /    .-\"\"~~--.            `\"-,   ;_    /\r\n  |              \\               \\  | `\"\"`\r\n   \\__.--'`\"-.   /_               |'\r\n              `\"`  `~~~---..,     |\r\n jgs                         \\ _.-'`-.\r\n                              \\       \\\r\n                               '.     /\r\n                                 `\"~\"`\n");
             sb.Append("__________________________________________________\n");
 
             Console.WriteLine(sb);

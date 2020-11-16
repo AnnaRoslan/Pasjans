@@ -162,10 +162,6 @@ namespace Pasjans
                 }
             });
 
-            if (finalStocks.All(x => x.Count == noRequiredCardsToFinal))
-            {
-                table.IsGameWon = true;
-            }
         }
 
         private Table GetNewCardFromReserveStock(Table table)
