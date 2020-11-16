@@ -62,9 +62,8 @@ namespace Pasjans
             Stock7.Last().IsReversed = true;
             
             ReserveStock.AddRange(deck.DeckCards.GetRange(0, 24));
+            ReserveStock.Last().IsReversed = true;
         }
-
-        
 
     }
 
