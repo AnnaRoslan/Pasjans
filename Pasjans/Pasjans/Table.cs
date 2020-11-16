@@ -8,6 +8,7 @@ namespace Pasjans
     [Serializable]
     public class Table
     {
+        public bool IsGameWon { get; set; }
         public List<Card> ReserveStock { get; set; }
         public List<Card> FinalStock1 { get; set; }
         public List<Card> FinalStock2 { get; set; }
@@ -24,6 +25,8 @@ namespace Pasjans
 
         public Table()
         {
+            IsGameWon = false;
+
             ReserveStock = new List<Card>();
 
             FinalStock1 = new List<Card>();
