@@ -7,17 +7,30 @@ namespace Pasjans
 {
     public class CardMover
     {
-        public CardMover()
-        {
-
-        }
-
+        private List<Table> _tableHistory = new List<Table>();
         public Table UndoMove()
         {
-            return new Table();
+            if (_tableHistory.Count == 0)
+            {
+                throw new Exception("Can not undo move, more previous moves.");
+            }
+
+            var lastTable = _tableHistory.Last();
+            _tableHistory.RemoveAt(_tableHistory.Count - 1);
+
+            return lastTable;
         }
         public Table MoveCard(Table table, int from, int to, Card card)
         {
+            if (table != null)
+            {
+                _tableHistory.Add(table.Clone());
+            }
+            else
+            {
+                throw new ArgumentException("Table can not be null.");
+            }
+
             if (from == 0 && to == 0)
             {
                 return GetNewCardFromReserveStock(table);
@@ -74,7 +87,7 @@ namespace Pasjans
             Revert(fromStock);
 
             MoveToFinal(table);
-
+            
             return table;
         }
 

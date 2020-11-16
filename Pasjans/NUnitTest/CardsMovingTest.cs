@@ -195,6 +195,15 @@ namespace NUnitTest
         }
 
         [Test]
+        public void TryUndoWithNoMorePrevMovesTest()
+        {
+            Assert.Throws(typeof(Exception), () => _cardMover.UndoMove());
+            _cardMover.MoveCard(_table, 1, 2, new Card(CardValue.Two, Color.Heart));
+            _cardMover.UndoMove();
+            Assert.Throws(typeof(Exception), () => _cardMover.UndoMove());
+        }
+
+        [Test]
         public void UndoMoveTest()
         {
             var tableCopy = _table.Clone();
