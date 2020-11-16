@@ -39,6 +39,15 @@ namespace NUnitTest
         }
 
         [Test]
+        public void TestNullReferences()
+        {
+            Assert.Throws(typeof(ArgumentException),
+                () => _cardMover.MoveCard(null, 1, 2, new Card(CardValue.Two, Color.Heart)));
+            Assert.Throws(typeof(ArgumentException),
+                () => _cardMover.MoveCard(_table, 1, 2, null));
+        }
+
+        [Test]
         public void TryMovingFromNonExistingStock()
         {
             Assert.Throws(typeof(ArgumentException),
@@ -238,17 +247,18 @@ namespace NUnitTest
             _table.Stock1.Clear();
             Assert.AreEqual(0, _table.Stock1.Count);
             Assert.AreEqual(0, _table.FinalStock1.Count);
-            for (var i = 12; i > 0; i--)
+            for (var i = 11; i > 0; i--)
             {
                 _table.Stock1.Add(new Card((CardValue)i, (Color)(i % 2)) { IsReversed = true });
             }
-            Assert.AreEqual(12, _table.Stock1.Count);
+            Assert.AreEqual(11, _table.Stock1.Count);
             _table.Stock2.Clear();
             Assert.AreEqual(0, _table.Stock2.Count);
-            _table.Stock2.Add(new Card(CardValue.King, Color.Club) { IsReversed = false });
-            Assert.AreEqual(1, _table.Stock2.Count);
-            _cardMover.MoveCard(_table, 1, 2, new Card(CardValue.Queen, Color.Heart));
-            Assert.AreEqual(13, _table.Stock1.Count);
+            _table.Stock2.Add(new Card(CardValue.King, Color.Club) {IsReversed = false});
+            _table.Stock2.Add(new Card(CardValue.Queen, Color.Heart) {IsReversed = true});
+            Assert.AreEqual(2, _table.Stock2.Count);
+            _cardMover.MoveCard(_table, 1, 2, new Card(CardValue.Jack, Color.Spade));
+            Assert.AreEqual(13, _table.Stock2.Count);
             Assert.AreEqual(0, _table.FinalStock1.Count);
         }
     }

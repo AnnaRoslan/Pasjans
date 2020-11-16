@@ -93,6 +93,11 @@ namespace Pasjans
 
         private bool CanLayCardOnOther(Card lastCard, Card cardToMove)
         {
+            if (!lastCard.IsReversed)
+            {
+                return false;
+            }
+
             if ((int)lastCard.CardValue - (int)cardToMove.CardValue != 1)
             {
                 return false;
